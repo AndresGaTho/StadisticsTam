@@ -1,0 +1,21 @@
+<!-- team-presentation-minimal.component.html -->
+<div class="team-presentation-minimal card">
+  <div class="presentation-content">
+    <div class="logo-wrapper">
+      <img 
+        [src]="team.logo" 
+        [alt]="team.name" 
+        class="team-logo-minimal"
+      >
+    </div>
+    
+    <div class="text-content">
+      <h1 class="team-title">{{ team.name }}</h1>
+      <div class="team-subtitle">
+        <span class="record">{{ team.wins }}W - {{ team.losses }}L </span>
+        <span class="divider">•</span>
+        <span class="win-rate">{{ getWinRate() }}% de efectividad</span>
+      </div>
+    </div>
+  </div>
+</div>

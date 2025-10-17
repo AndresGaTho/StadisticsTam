@@ -1,0 +1,107 @@
+<!-- players-list.component.html -->
+<div class="players-list">
+    <div class="players-header">
+        <h3>Jugadores - {{category}}</h3>
+        <div class="stats-legend" *ngIf="editable">
+            <span class="legend-item">💡 Haz clic en las casillas para editar</span>
+        </div>
+    </div>
+
+    <div class="loading-spinner" *ngIf="loading">
+        Cargando jugadores...
+    </div>
+
+    <div class="error-message" *ngIf="error">
+        {{ error }}
+    </div>
+
+    <div class="table-container" *ngIf="!loading && !error">
+        <table class="players-table">
+            <thead>
+                <tr>
+                    <th>Jugador</th>
+                    <th>PTS</th>
+                    <th>PTD</th>
+                    <th>INT</th>
+                    <th>SACKS</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let player of players" class="player-row">
+                    <td>
+                        <div class="player-info">
+                            <div class="player-photo-container" (click)="openPhotoModal(player)"
+                                (dblclick)="openPhotoModal(player)" [attr.aria-label]="'Ver foto de ' + player.name">
+                                <div *ngIf="player.photo; else noPhoto">
+                                    <img [src]="player.photo" [alt]="player.name" class="player-photo"
+                                        (error)="player.photo = ''">
+                                </div>
+                                <ng-template #noPhoto>
+                                    <div class="player-photo no-photo">
+                                        {{ getInitials(player) }}
+                                    </div>
+                                </ng-template>
+                            </div>
+                            <div class="player-details">
+                                <span class="player-name">{{ player.name }}</span>
+                                <span class="player-lastname">
+                                    {{ player.fLastName }} {{ player.mLastName }}
+                                </span>
+                            </div>
+                        </div>
+                    </td>
+
+                    <!-- Columna PTS - Solo input manual -->
+                    <td class="stats-cell pts-cell" [class.editable]="editable">
+                        <div class="stats-content">
+                            <input *ngIf="editable" type="number" [ngModel]="getInputValue(player.id, 'pts')"
+                                (ngModelChange)="onInputChange(player.id, 'pts', $event)" (blur)="onFieldBlur()"
+                                (keydown)="onFieldKeydown($event, player.id, 'pts')" min="0" class="stats-input"
+                                [class.modified]="isFieldModified(player.id, 'pts')" placeholder="0">
+                            <span *ngIf="!editable" class="stats-value">{{ getStatValue(player.id, 'pts') }}</span>
+                        </div>
+                    </td>
+
+                    <!-- Columna PTD - Solo input manual -->
+                    <td class="stats-cell ptd-cell" [class.editable]="editable">
+                        <div class="stats-content">
+                            <input *ngIf="editable" type="number" [ngModel]="getInputValue(player.id, 'ptd')"
+                                (ngModelChange)="onInputChange(player.id, 'ptd', $event)" (blur)="onFieldBlur()"
+                                (keydown)="onFieldKeydown($event, player.id, 'ptd')" min="0" class="stats-input"
+                                [class.modified]="isFieldModified(player.id, 'ptd')" placeholder="0">
+                            <span *ngIf="!editable" class="stats-value">{{ getStatValue(player.id, 'ptd') }}</span>
+                        </div>
+                    </td>
+
+                    <!-- Columna INT - Solo input manual -->
+                    <td class="stats-cell int-cell" [class.editable]="editable">
+                        <div class="stats-content">
+                            <input *ngIf="editable" type="number" [ngModel]="getInputValue(player.id, 'int')"
+                                (ngModelChange)="onInputChange(player.id, 'int', $event)" (blur)="onFieldBlur()"
+                                (keydown)="onFieldKeydown($event, player.id, 'int')" min="0" class="stats-input"
+                                [class.modified]="isFieldModified(player.id, 'int')" placeholder="0">
+                            <span *ngIf="!editable" class="stats-value">{{ getStatValue(player.id, 'int') }}</span>
+                        </div>
+                    </td>
+
+                    <!-- Columna SACKS - Solo input manual -->
+                    <td class="stats-cell sacks-cell" [class.editable]="editable">
+                        <div class="stats-content">
+                            <input *ngIf="editable" type="number" [ngModel]="getInputValue(player.id, 'sacks')"
+                                (ngModelChange)="onInputChange(player.id, 'sacks', $event)" (blur)="onFieldBlur()"
+                                (keydown)="onFieldKeydown($event, player.id, 'sacks')" min="0" class="stats-input"
+                                [class.modified]="isFieldModified(player.id, 'sacks')" placeholder="0">
+                            <span *ngIf="!editable" class="stats-value">{{ getStatValue(player.id, 'sacks') }}</span>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <app-photo-modal [player]="selectedPlayer" [visible]="photoModalVisible"
+        (close)="closePhotoModal()"></app-photo-modal>
+
+    <div class="save-indicator" *ngIf="hasPendingUpdates()">
+        <span class="saving-text">💾 Guardando cambios...</span>
+    </div>
+</div>

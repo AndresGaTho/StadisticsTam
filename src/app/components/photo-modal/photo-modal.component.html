@@ -1,0 +1,31 @@
+<div *ngIf="visible" class="photo-modal" [class.closing]="isClosing" (click)="onBackdropClick($event)">
+    <div class="modal-content">
+        <button class="modal-close" (click)="closeModal($event)">
+            ×
+        </button>
+
+        <!-- Agregar ngIf para player -->
+        <div *ngIf="player">
+            <div *ngIf="player.photo; else modalNoPhoto">
+                <img [src]="player.photo" [alt]="player.name" class="modal-image">
+            </div>
+            <ng-template #modalNoPhoto>
+                <div class="modal-image no-photo">
+                    {{ getInitials(player) }} <!-- Ahora player no es null -->
+                </div>
+            </ng-template>
+
+            <div class="modal-player-info">
+                <div class="modal-player-name">{{ player.name }}</div>
+                <div class="modal-player-lastname">
+                    {{ player.fLastName }} {{ player.mLastName }}
+                </div>
+            </div>
+        </div>
+
+        <!-- Mensaje por si player es null -->
+        <div *ngIf="!player" class="no-player-message">
+            <p>No se ha seleccionado ningún jugador</p>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,14 @@
+{
+  "/pag": {
+    "target": "https://juegatocho.com",
+    "secure": true,
+    "changeOrigin": true,
+    "logLevel": "debug",
+    "pathRewrite": {
+      "^/api": ""
+    },
+    "headers": {
+      "Connection": "keep-alive"
+    }
+  }
+}

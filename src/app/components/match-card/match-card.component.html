@@ -1,0 +1,74 @@
+<!-- match-card.component.html -->
+<div class="match-card" [class.match-live]="match.status === 'live'"
+  [class.match-finished]="match.status === 'finished'">
+
+  <div class="match-header">
+    <div class="time-badge">
+      <i class="icon-clock"></i>
+      {{ match.time }}
+    </div>
+    <div class="match-status" [class]="getStatusBadgeClass(match.status)">
+      <span class="status-dot"></span>
+      {{ getStatusText(match.status) }}
+    </div>
+    {{match.category}}
+  </div>
+
+  <div class="teams-container-horizontal">
+
+    <!-- Team A -->
+    <div class="team-column team-a" (click)="teamClicked.emit({match: match, team: match.teamA, isTeamA: true})">
+      <div class="team-header">
+        <img [src]="match.teamA.logo" [alt]="match.teamA.name" class="team-logo">
+      </div>
+      <div class="team-content">
+        <span class="team-name">{{ match.teamA.name }}</span>
+        <span class="team-record">
+          {{ match.teamA.wins }}W - {{ match.teamA.losses }}L
+        </span>
+        <div class="team-score" [class.winning-score]="(match.scoreA || 0) > (match.scoreB || 0)"
+          [class.tie-score]="(match.scoreA || 0) === (match.scoreB || 0)">
+          {{ match.scoreA || 0 }}
+        </div>
+      </div>
+      <div class="team-click-hint">
+        <i class="icon-click">👆</i>
+      </div>
+    </div>
+
+    <div class="center-column">
+      <div class="vs-circle">
+        <span class="vs-text">VS</span>
+      </div>
+    </div>
+
+    <!-- Team B -->
+    <div class="team-column team-b" (click)="teamClicked.emit({match: match, team: match.teamB, isTeamA: false})">
+      <div class="team-header">
+        <img [src]="match.teamB.logo" [alt]="match.teamB.name" class="team-logo">
+      </div>
+      <div class="team-content">
+        <span class="team-name">{{ match.teamB.name }}</span>
+        <span class="team-record">
+          {{ match.teamB.wins }}W - {{ match.teamB.losses }}L
+        </span>
+        <div class="team-score" [class.winning-score]="(match.scoreB || 0) > (match.scoreA || 0)"
+          [class.tie-score]="(match.scoreB || 0) === (match.scoreA || 0)">
+          {{ match.scoreB || 0 }}
+        </div>
+      </div>
+      <div class="team-click-hint">
+        <i class="icon-click">👆</i>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="match-actions">
+    <div class="live-indicator" *ngIf="match.status === 'live'">
+      <span class="live-pulse"></span>
+      EN VIVO
+    </div>
+  </div>
+
+</div>

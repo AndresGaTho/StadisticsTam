@@ -1,0 +1,168 @@
+.fields-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  -webkit-overflow-scrolling: touch;
+}
+
+.field-group {
+  background: white;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
+}
+
+.field-group:hover {
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+.field-group.expanded {
+  margin-bottom: 2rem;
+  border-radius: 15px 15px 0 0;
+}
+
+.field-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.25rem 1.5rem;
+  background: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border-bottom: 2px solid transparent;
+}
+
+.field-header:hover {
+  background: #f8fafc;
+}
+
+.field-header.field-with-live {
+  border-left: 4px solid var(--live-color);
+}
+
+.field-group.expanded .field-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: white;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  border-bottom: 2px solid #e2e8f0;
+}
+
+.field-info {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.field-name {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #2d3748;
+}
+
+.field-stats {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.match-count {
+  background: #edf2f7;
+  color: #4a5568;
+  padding: 0.4rem 0.8rem;
+  border-radius: 12px;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.live-count-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--live-color);
+  color: #fff;
+  padding: 0.4rem 0.8rem;
+  border-radius: 12px;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.field-toggle {
+  transition: transform 0.3s ease;
+}
+
+.toggle-icon {
+  font-size: 1.2rem;
+  color: #718096;
+  transition: transform 0.3s ease;
+}
+
+.toggle-icon.rotated {
+  transform: rotate(180deg);
+}
+
+.field-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease;
+  background: #f8fafc;
+}
+
+.field-content.expanded {
+  max-height: none;
+  padding: 1.5rem;
+}
+
+.winning-score {
+  color: #e53e3e;
+}
+
+.tie-score {
+  color: #d69e2e;
+}
+
+.field-badge-mobile {
+  background: #cbd5e1;
+  color: #4a5568;
+  padding: 0.3rem 0.5rem;
+  border-radius: 6px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-align: center;
+  width: 100%;
+  white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+  .field-header {
+    padding: 1rem;
+  }
+
+  .field-group.expanded .field-header {
+    padding: 1rem;
+    position: sticky;
+    top: 0;
+  }
+
+  .field-info {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .field-stats {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .field-content.expanded {
+    padding: 1rem;
+  }
+}

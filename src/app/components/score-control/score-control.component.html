@@ -1,0 +1,90 @@
+<!-- score-controls.component.html -->
+<div class="score-controls">
+  <h3>🏈 Actualizar Marcador</h3>
+
+  <!-- Puntos Rápidos -->
+  <div class="quick-points">
+    <h4>Puntos Rápidos:</h4>
+    <div class="points-buttons">
+      <button class="point-btn point-1" (click)="addPoints.emit(1)">+1</button>
+      <button class="point-btn point-2" (click)="addPoints.emit(2)">+2</button>
+      <button class="point-btn point-6" (click)="addPoints.emit(6)">+6</button>
+    </div>
+  </div>
+
+  <!-- Entrada Manual -->
+  <div class="manual-input">
+    <h4>Entrada Manual:</h4>
+    <div class="input-group">
+      <input type="number" 
+             [value]="currentScore" 
+             (input)="onManualInput($event)"
+             (keydown)="onScoreKeydown($event)"
+             min="0" 
+             max="999" 
+             class="score-input"
+             placeholder="Escribe el marcador">
+      <span class="input-suffix">pts</span>
+    </div>
+  </div>
+
+  <div class="col d-flex">
+    <!-- Display del Marcador -->
+    <div class="score-display-final col-6 px-2">
+      <div class="current-score-display">
+        <span class="score-large">{{ currentScore }}</span>
+        <span class="score-label">PUNTOS</span>
+      </div>
+      <div class="score-change" *ngIf="lastChange !== 0">
+        <span [class]="lastChange > 0 ? 'positive' : 'negative'">
+          {{ lastChange > 0 ? '+' : '' }}{{ lastChange }}
+        </span>
+      </div>
+    </div>
+
+    <!-- Historial de Cambios -->
+    <div class="change-history col-6 px-2" *ngIf="scoreHistory.length > 0">
+      <h4>Últimos Cambios:</h4>
+      <div class="history-list">
+        <div *ngFor="let change of scoreHistory; let i = index" 
+             class="history-item" 
+             [class.recent]="i === 0">
+          <span class="change-amount" [class]="change.amount > 0 ? 'positive' : 'negative'">
+            {{ change.amount > 0 ? '+' : '' }}{{ change.amount }}
+          </span>
+          <span class="change-time">{{ change.timestamp | date:'HH:mm:ss' }}</span>
+          <button class="btn-undo" (click)="undoChange.emit(i)" title="Deshacer este cambio">
+            ↶
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Acciones -->
+  <div class="score-actions">
+    <button class="btn-action btn-reset" 
+            (click)="resetScore.emit()" 
+            [disabled]="currentScore === 0">
+      🔄 Reiniciar
+    </button>
+    <button class="btn-action btn-undo-last" 
+            (click)="undoLastChange.emit()" 
+            [disabled]="scoreHistory.length === 0">
+      ↩️ Deshacer Último
+    </button>
+    <button class="btn-action btn-save" (click)="saveScore.emit()">
+      💾 Guardar Marcador
+    </button>
+  </div>
+
+  <!-- Resumen del Cambio -->
+  <div class="change-summary" *ngIf="hasUnsavedChanges">
+    <div class="summary-content">
+      <span class="summary-text">Cambios sin guardar:</span>
+      <span class="summary-change" [class]="totalChange > 0 ? 'positive' : 'negative'">
+        {{ totalChange > 0 ? '+' : '' }}{{ totalChange }} puntos
+      </span>
+    </div>
+  </div>
+</div>

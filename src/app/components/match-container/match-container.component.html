@@ -1,0 +1,59 @@
+<!-- match-container.component.html -->
+<div class="match-container">
+  <div class="container-fluid">
+
+    <!-- Header -->
+    <app-matches-header 
+      [fieldCount]="objectKeys(groupedMatches).length"
+      [liveFieldsCount]="fieldsWithLiveMatches.length">
+    </app-matches-header>
+
+    <div class="fields-container">
+      <app-field-group 
+        *ngFor="let field of objectKeys(groupedMatches)"
+        [fieldName]="field"
+        [matchCount]="getFieldMatchCount(field)"
+        [liveCount]="getFieldLiveCount(field)"
+        [expanded]="isFieldExpanded(field)"
+        (toggleExpanded)="toggleField(field)">
+        
+        <app-match-card 
+          *ngFor="let match of groupedMatches[field]"
+          [match]="match"
+          (teamClicked)="openTeamModal($event.match, $event.team, $event.isTeamA)"
+          (statsClicked)="onStatsClick($event)">
+        </app-match-card>
+
+        <div *ngIf="groupedMatches[field].length === 0" class="no-matches">
+          No hay partidos programados para este campo
+        </div>
+
+      </app-field-group>
+    </div>
+
+    <!-- Botón para cerrar todos los campos -->
+    <button class="close-all-fields" 
+            [class.visible]="anyFieldExpanded()" 
+            (click)="collapseAllFields()"
+            [attr.aria-label]="'Cerrar todos los campos expandidos'">
+      <span class="icon-close">✕</span>
+    </button>
+
+    <!-- Modal del Equipo -->
+    <app-team-modal
+      [visible]="showTeamModal"
+      [team]="selectedTeam"
+      [match]="selectedMatch"
+      [currentScore]="newScore"
+      [scoreHistory]="scoreHistory"
+      [hasUnsavedChanges]="hasUnsavedChanges"
+      [totalChange]="totalChange"
+      [lastChange]="lastChange"
+      (close)="closeTeamModal()"
+      (scoreUpdate)="onScoreUpdate($event)"
+      (undoScoreChange)="onUndoScoreChange($event)"
+      (saveScore)="updateScore()">
+    </app-team-modal>
+
+  </div>
+</div>

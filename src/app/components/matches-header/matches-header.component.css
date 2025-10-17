@@ -1,0 +1,26 @@
+.matches-header {
+  text-align: center;
+  color: white;
+  margin-bottom: 2rem;
+  padding: 1rem;
+}
+.matches-title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 0.5rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+.matches-subtitle {
+  font-size: 1.1rem;
+  opacity: 0.9;
+  margin: 0;
+}
+.live-count {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--live-color);
+  padding: 0.3rem 0.8rem;
+  border-radius: 15px;
+  font-weight: 600;
+}

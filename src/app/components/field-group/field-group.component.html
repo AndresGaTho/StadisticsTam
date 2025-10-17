@@ -1,0 +1,31 @@
+<!-- field-group.component.html -->
+<div class="field-group" [class.expanded]="expanded" [attr.data-field]="fieldName">
+
+  <div class="field-header" [class.field-with-live]="liveCount > 0" (click)="toggleExpanded.emit()">
+    <div class="field-info">
+      <div class="field-name">
+        <i class="icon-field"></i>
+        {{ fieldName }}
+      </div>
+      <div class="field-stats">
+        <span class="match-count">
+          {{ matchCount }} partido{{ matchCount > 1 ? 's' : '' }}
+        </span>
+        <span class="live-count-badge" *ngIf="liveCount > 0">
+          <span class="live-pulse"></span>
+          {{ liveCount }} en vivo
+        </span>
+      </div>
+    </div>
+    <div class="field-actions">
+      <div class="field-toggle">
+        <i class="toggle-icon" [class.rotated]="expanded">▼</i>
+      </div>
+    </div>
+  </div>
+
+  <div class="field-content" [class.expanded]="expanded">
+    <ng-content></ng-content>
+  </div>
+
+</div>

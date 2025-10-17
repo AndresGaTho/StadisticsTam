@@ -1,0 +1,53 @@
+<!-- team-modal.component.html -->
+<div *ngIf="visible" class="team-modal-overlay" (click)="close.emit()">
+  <div class="team-modal-content" (click)="$event.stopPropagation()">
+
+    <!-- Header del Modal -->
+    <div class="modal-header">
+      <div class="modal-team-info">
+        <img [src]="team?.logo" [alt]="team?.name" class="modal-team-logo">
+        <div class="modal-team-details">
+          <h2 class="modal-team-name">{{ team?.name }}</h2>
+          <p class="modal-team-record" *ngIf="team">
+            {{ team.wins }}W - {{ team.losses }}L ({{ getWinRate(team) }}%)
+          </p>
+        </div>
+      </div>
+      <button class="modal-close" (click)="close.emit()">
+        <span class="icon-close">✕</span>
+      </button>
+    </div>
+
+    <!-- Controles de Score -->
+    <app-score-control [currentScore]="currentScore" [scoreHistory]="scoreHistory"
+      [hasUnsavedChanges]="hasUnsavedChanges" [totalChange]="totalChange" [lastChange]="lastChange"
+      (addPoints)="onAddPoints($event)" (manualScoreChange)="onManualScoreChange($event)"
+      (undoChange)="onUndoChange($event)" (undoLastChange)="onUndoLastChange()" (resetScore)="onResetScore()"
+      (saveScore)="onSaveScore()">
+    </app-score-control>
+
+    <!-- Componente Players List -->
+    <div class="players-list-section">
+      <h3>Jugadores del Equipo</h3>
+      <app-players-list [teamId]="team?.id" [category]="match!.category" [idCategory]="match!.idCategory"
+        [editable]="true" (statsUpdate)="onPlayerStatsUpdate($event)">
+
+        ></app-players-list>
+    </div>
+
+    <!-- Información del Partido -->
+    <div class="match-info-modal">
+      <h4>Información del Partido</h4>
+      <div class="match-details">
+        <p><strong>Campo:</strong> {{ match?.field }}</p>
+        <p><strong>Hora:</strong> {{ match?.time }}</p>
+        <p><strong>Estado:</strong> {{ match?.status }}</p>
+        <p><strong>Oponente:</strong> {{ getOpponentTeam()?.name }}</p>
+        <p><strong>Marcador Actual:</strong>
+          {{ match?.scoreA || 0 }} - {{ match?.scoreB || 0 }}
+        </p>
+      </div>
+    </div>
+
+  </div>
+</div>

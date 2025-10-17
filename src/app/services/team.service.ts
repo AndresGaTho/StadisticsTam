@@ -1,0 +1,210 @@
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Match } from '../interfaces/Match';
+import { Observable, of } from 'rxjs';
+
+@Injectable({
+  providedIn: 'root',
+})
+export class TeamService {
+  constructor(private http: HttpClient) {}
+
+  getAllGames(): Observable<Match[]> {
+    const matches: Match[] = [
+      {
+        id: 1,
+        field: 'Campo 1',
+        time: '07:00 AM',
+        teamA: {
+          id: 1,
+          name: 'Pitbulls',
+          logo: 'https://tse1.mm.bing.net/th/id/OIF.vX2c5RAR9ZTFBTtYk4TUBw?cb=12&pid=Api',
+          wins: 5,
+          losses: 2,
+        },
+        teamB: {
+          id: 2,
+          name: 'Tiburones',
+          logo: 'https://tse1.mm.bing.net/th/id/OIF.vX2c5RAR9ZTFBTtYk4TUBw?cb=12&pid=Api',
+          wins: 4,
+          losses: 3,
+        },
+        status: 'scheduled',
+        scoreA: 0,
+        scoreB: 0,
+        category: 'varonil',
+        idCategory: 2,
+      },
+      {
+        id: 1,
+        field: 'Campo 1',
+        time: '07:00 AM',
+        teamA: {
+          id: 1,
+          name: 'Pitbulls',
+          logo: 'https://tse1.mm.bing.net/th/id/OIF.vX2c5RAR9ZTFBTtYk4TUBw?cb=12&pid=Api',
+          wins: 5,
+          losses: 2,
+        },
+        teamB: {
+          id: 2,
+          name: 'Tiburones',
+          logo: 'https://tse1.mm.bing.net/th/id/OIF.vX2c5RAR9ZTFBTtYk4TUBw?cb=12&pid=Api',
+          wins: 4,
+          losses: 3,
+        },
+        status: 'scheduled',
+        scoreA: 0,
+        scoreB: 0,
+        category: 'femenil',
+        idCategory: 1,
+      },
+      {
+        id: 1,
+        field: 'Campo 1',
+        time: '07:00 AM',
+        teamA: {
+          id: 1,
+          name: 'Pitbulls',
+          logo: 'https://tse1.mm.bing.net/th/id/OIF.vX2c5RAR9ZTFBTtYk4TUBw?cb=12&pid=Api',
+          wins: 5,
+          losses: 2,
+        },
+        teamB: {
+          id: 2,
+          name: 'Tiburones',
+          logo: 'https://tse1.mm.bing.net/th/id/OIF.vX2c5RAR9ZTFBTtYk4TUBw?cb=12&pid=Api',
+          wins: 4,
+          losses: 3,
+        },
+        status: 'scheduled',
+        scoreA: 0,
+        scoreB: 0,
+        category: 'mixto',
+        idCategory: 3,
+      },
+      {
+        id: 1,
+        field: 'Campo 1',
+        time: '07:00 AM',
+        teamA: {
+          id: 1,
+          name: 'Pitbulls',
+          logo: 'https://tse1.mm.bing.net/th/id/OIF.vX2c5RAR9ZTFBTtYk4TUBw?cb=12&pid=Api',
+          wins: 5,
+          losses: 2,
+        },
+        teamB: {
+          id: 2,
+          name: 'Tiburones',
+          logo: 'https://tse1.mm.bing.net/th/id/OIF.vX2c5RAR9ZTFBTtYk4TUBw?cb=12&pid=Api',
+          wins: 4,
+          losses: 3,
+        },
+        status: 'scheduled',
+        scoreA: 0,
+        scoreB: 0,
+        category: 'varonil',
+        idCategory: 2,
+      },
+      {
+        id: 2,
+        field: 'Campo 2',
+        time: '07:00 AM',
+        teamA: {
+          id: 3,
+          name: 'Tenemos un pinche nombre bien pinche largo nomas por cagar el palo al diseñador',
+          logo: 'https://tse1.mm.bing.net/th/id/OIF.vX2c5RAR9ZTFBTtYk4TUBw?cb=12&pid=Api',
+          wins: 6,
+          losses: 1,
+        },
+        teamB: {
+          id: 4,
+          name: 'Leones',
+          logo: 'https://tse1.mm.bing.net/th/id/OIF.vX2c5RAR9ZTFBTtYk4TUBw?cb=12&pid=Api',
+          wins: 3,
+          losses: 4,
+        },
+        status: 'live',
+        scoreA: 14,
+        scoreB: 7,
+        category: 'varonil',
+        idCategory: 2,
+      },
+      {
+        id: 3,
+        field: 'Campo 3',
+        category: 'varonil',
+        idCategory: 2,
+        time: '07:00 AM',
+        teamA: {
+          id: 5,
+          name: 'Tigres',
+          logo: 'https://tse1.mm.bing.net/th/id/OIF.vX2c5RAR9ZTFBTtYk4TUBw?cb=12&pid=Api',
+          wins: 2,
+          losses: 5,
+        },
+        teamB: {
+          id: 6,
+          name: 'Osos',
+          logo: 'https://tse1.mm.bing.net/th/id/OIF.vX2c5RAR9ZTFBTtYk4TUBw?cb=12&pid=Api',
+          wins: 5,
+          losses: 2,
+        },
+        status: 'scheduled',
+        scoreA: 0,
+        scoreB: 0,
+      },
+      {
+        id: 4,
+        category: 'varonil',
+        idCategory: 2,
+        field: 'Campo 1',
+        time: '09:00 AM',
+        teamA: {
+          id: 7,
+          name: 'Halcones',
+          logo: 'https://tse1.mm.bing.net/th/id/OIF.vX2c5RAR9ZTFBTtYk4TUBw?cb=12&pid=Api',
+          wins: 4,
+          losses: 3,
+        },
+        teamB: {
+          id: 8,
+          name: 'Panteras',
+          logo: 'https://tse1.mm.bing.net/th/id/OIF.vX2c5RAR9ZTFBTtYk4TUBw?cb=12&pid=Api',
+          wins: 3,
+          losses: 4,
+        },
+        status: 'scheduled',
+        scoreA: 0,
+        scoreB: 0,
+      },
+      {
+        id: 5,
+        category: 'varonil',
+        idCategory: 2,
+        field: 'Campo 2',
+        time: '09:00 AM',
+        teamA: {
+          id: 1,
+          name: 'Pitbulls',
+          logo: 'https://tse1.mm.bing.net/th/id/OIF.vX2c5RAR9ZTFBTtYk4TUBw?cb=12&pid=Api',
+          wins: 5,
+          losses: 2,
+        },
+        teamB: {
+          id: 3,
+          name: 'Águilas',
+          logo: 'https://tse1.mm.bing.net/th/id/OIF.vX2c5RAR9ZTFBTtYk4TUBw?cb=12&pid=Api',
+          wins: 6,
+          losses: 1,
+        },
+        status: 'finished',
+        scoreA: 21,
+        scoreB: 28,
+      },
+    ];
+
+    return of(matches);
+  }
+}
