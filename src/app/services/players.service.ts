@@ -17,14 +17,16 @@ export class PlayersService {
         fLastName: 'Garcia',
         mLastName: 'Thomas',
         photo: '',
+        gender: 'male',
       },
       {
         id: 2,
-        name: 'Andrés',
+        name: 'Andrea',
         fLastName: 'Garcia',
         mLastName: 'Thomas',
         photo:
           'https://images.pexels.com/photos/1587009/pexels-photo-1587009.jpeg',
+        gender: 'female',
       },
       {
         id: 3,
@@ -33,6 +35,7 @@ export class PlayersService {
         mLastName: 'Thomas',
         photo:
           'https://images.pexels.com/photos/1587009/pexels-photo-1587009.jpeg',
+        gender: 'male',
       },
       {
         id: 4,
@@ -41,6 +44,7 @@ export class PlayersService {
         mLastName: 'Thomas',
         photo:
           'https://images.pexels.com/photos/1587009/pexels-photo-1587009.jpeg',
+        gender: 'male',
       },
       {
         id: 5,
@@ -49,6 +53,7 @@ export class PlayersService {
         mLastName: 'Thomas',
         photo:
           'https://images.pexels.com/photos/1587009/pexels-photo-1587009.jpeg',
+        gender: 'female',
       },
       {
         id: 6,
@@ -57,6 +62,7 @@ export class PlayersService {
         mLastName: 'Thomas',
         photo:
           'https://images.pexels.com/photos/1587009/pexels-photo-1587009.jpeg',
+        gender: 'male',
       },
       {
         id: 7,
@@ -65,6 +71,7 @@ export class PlayersService {
         mLastName: 'Thomas',
         photo:
           'https://images.pexels.com/photos/1587009/pexels-photo-1587009.jpeg',
+        gender: 'male',
       },
       {
         id: 8,
@@ -73,6 +80,7 @@ export class PlayersService {
         mLastName: 'Thomas',
         photo:
           'https://images.pexels.com/photos/1587009/pexels-photo-1587009.jpeg',
+        gender: 'male',
       },
       {
         id: 9,
@@ -81,6 +89,7 @@ export class PlayersService {
         mLastName: 'Thomas',
         photo:
           'https://images.pexels.com/photos/1587009/pexels-photo-1587009.jpeg',
+        gender: 'male',
       },
       {
         id: 10,
@@ -89,6 +98,7 @@ export class PlayersService {
         mLastName: 'Thomas',
         photo:
           'https://images.pexels.com/photos/1587009/pexels-photo-1587009.jpeg',
+        gender: 'male',
       },
     ];
     return of(players);

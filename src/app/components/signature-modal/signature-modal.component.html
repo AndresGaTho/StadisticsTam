@@ -1,0 +1,37 @@
+<div class="modal-overlay" *ngIf="isVisible" (click)="close()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <h2>Firma Electrónica</h2>
+      <button class="close-button" (click)="close()">&times;</button>
+    </div>
+    
+    <div class="modal-body">
+      <p>Firme en el área inferior usando el mouse o tu dedo</p>
+      
+      <div class="signature-container">
+        <canvas 
+          #signatureCanvas
+          width="600" 
+          height="200"
+          (mousedown)="startDrawing($event)"
+          (mousemove)="draw($event)"
+          (mouseup)="stopDrawing()"
+          (mouseleave)="stopDrawing()"
+          (touchstart)="handleTouchStart($event)"
+          (touchmove)="handleTouchMove($event)"
+          (touchend)="handleTouchEnd($event)"
+          class="signature-canvas">
+        </canvas>
+      </div>
+      
+      <div class="signature-actions">
+        <button type="button" class="btn-clear" (click)="clearSignature()">
+          Limpiar
+        </button>
+        <button type="button" class="btn-save" (click)="saveSignature()" [disabled]="!hasSignature()">
+          Guardar Firma
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -48,6 +48,10 @@
         </p>
       </div>
     </div>
+    
+    <app-referees-list [teamId]="team?.id" [matchId]="match?.id" [maxCommentLength]="1000"
+      (ratingSubmitted)="onRatingSubmitted($event)">
+    </app-referees-list>
 
   </div>
 </div>

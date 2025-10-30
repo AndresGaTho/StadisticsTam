@@ -1,0 +1,77 @@
+<div class="evaluation-panel">
+  <div class="panel-header">
+    <div class="panel-title">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M9 12L11 14L15 10M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" 
+              stroke="currentColor" stroke-width="2"/>
+      </svg>
+      <h3>Evaluación del Arbitraje</h3>
+    </div>
+    <div class="completion-status" [class.complete]="signatureData">
+      <span class="status-indicator" [class.complete]="signatureData"></span>
+      {{ signatureData ? 'Completado' : 'Pendiente' }}
+    </div>
+  </div>
+
+  <!-- Comentarios -->
+  <div class="comments-section">
+    <div class="comments-header">
+      <label class="comments-label">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M21 15C21 15.5304 20.7893 16.0391 20.4142 16.4142C20.0391 16.7893 19.5304 17 19 17H7L3 21V5C3 4.46957 3.21071 3.96086 3.58579 3.58579C3.96086 3.21071 4.46957 3 5 3H19C19.5304 3 20.0391 3.21071 20.4142 3.58579C20.7893 3.96086 21 4.46957 21 5V15Z" 
+                stroke="currentColor" stroke-width="2"/>
+        </svg>
+        Comentarios del partido
+      </label>
+      <div class="chars-counter" 
+           [class.warning]="getRemainingChars() < 100" 
+           [class.danger]="getRemainingChars() < 0">
+        {{ getRemainingChars() }}/{{ maxCommentLength }}
+      </div>
+    </div>
+    <textarea 
+      [(ngModel)]="comments"
+      (input)="onCommentsChange()"
+      [maxlength]="maxCommentLength"
+      placeholder="Describe el desempeño del equipo arbitral, decisiones clave, aspectos positivos y áreas de mejora..."
+      class="comments-textarea"
+      rows="4">
+    </textarea>
+    <div class="textarea-footer">
+      <span class="hint-text">Tu evaluación ayuda a mejorar el arbitraje</span>
+    </div>
+  </div>
+
+  <!-- Firma y Acciones -->
+  <div class="actions-section">
+    <div class="signature-status" *ngIf="signatureData">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M9 12L11 14L15 10M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" 
+              stroke="currentColor" stroke-width="2"/>
+      </svg>
+      <span>Firma registrada - {{ signatureTimestamp | date:'short' }}</span>
+    </div>
+    
+    <div class="action-buttons">
+      <button class="btn-secondary" 
+              (click)="onOpenSignature()" 
+              [disabled]="comments.length === 0">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M15 5V7M15 11V13M15 17V19M5 5C5 4.46957 5.21071 3.96086 5.58579 3.58579C5.96086 3.21071 6.46957 3 7 3H17C17.5304 3 18.0391 3.21071 18.4142 3.58579C18.7893 3.96086 19 4.46957 19 5V19C19 19.5304 18.7893 20.0391 18.4142 20.4142C18.0391 20.7893 17.5304 21 17 21H7C6.46957 21 5.96086 20.7893 5.58579 20.4142C5.21071 20.0391 5 19.5304 5 19V5Z" 
+                stroke="currentColor" stroke-width="2"/>
+        </svg>
+        {{ signatureData ? 'Cambiar Firma' : 'Agregar Firma' }}
+      </button>
+      
+      <button class="btn-primary" 
+              (click)="onSubmitEvaluation()"
+              [disabled]="!signatureData || comments.length === 0">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M22 2L11 13M22 2L15 22L11 13M22 2L2 10L11 13" 
+                stroke="currentColor" stroke-width="2"/>
+        </svg>
+        Enviar Evaluación
+      </button>
+    </div>
+  </div>
+</div>

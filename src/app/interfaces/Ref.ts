@@ -1,8 +1,10 @@
-export interface Player {
+export interface Ref {
   id: number;
   name: string;
   fLastName: string;
   mLastName: string;
   photo: string;
-  gender: 'male' | 'female';
+  position:string;
+  rating?:number;
+  experience?:number;
 }

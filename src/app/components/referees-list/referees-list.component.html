@@ -1,0 +1,86 @@
+<div class="referees-section">
+  <!-- Header Rediseñado -->
+  <div class="section-header">
+    <div class="header-content">
+      <div class="title-section">
+        <div class="title-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" 
+                  stroke="currentColor" stroke-width="2"/>
+            <path d="M12 15C13.6569 15 15 13.6569 15 12C15 10.3431 13.6569 9 12 9C10.3431 9 9 10.3431 9 12C9 13.6569 10.3431 15 12 15Z" 
+                  stroke="currentColor" stroke-width="2"/>
+            <path d="M12 6V9" stroke="currentColor" stroke-width="2"/>
+            <path d="M12 15V18" stroke="currentColor" stroke-width="2"/>
+            <path d="M15 12H18" stroke="currentColor" stroke-width="2"/>
+            <path d="M6 12H9" stroke="currentColor" stroke-width="2"/>
+          </svg>
+        </div>
+        <div class="title-text">
+          <h2>Plantilla de Árbitros</h2>
+          <p class="referees-count">{{ referees.length }} árbitros en el equipo</p>
+        </div>
+      </div>
+      <button class="btn-rate-team" (click)="openTeamRatingModal()">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" 
+                fill="currentColor"/>
+        </svg>
+        <span>Evaluar Equipo</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Lista de Árbitros -->
+  <div class="referees-container">
+    <div class="referees-grid">
+      <app-referee-card 
+        *ngFor="let referee of referees" 
+        [referee]="referee"
+        (cardClick)="openRefereeModal($event)"
+        (rateClick)="openRefereeModal($event)">
+      </app-referee-card>
+    </div>
+  </div>
+
+  <!-- Panel de Evaluación -->
+  <app-evaluation-panel
+    [comments]="comments"
+    [signatureData]="signatureData"
+    [signatureTimestamp]="signatureTimestamp"
+    [maxCommentLength]="maxCommentLength"
+    (commentsChange)="onCommentsChange($event)"
+    (openSignature)="openSignatureModal()"
+    (submitEvaluation)="submitCompleteEvaluation()">
+  </app-evaluation-panel>
+</div>
+
+<!-- Modal de Calificación de Árbitro Individual -->
+<app-referee-modal
+  [referee]="selectedReferee"
+  [showModal]="showRefereeModal"
+  [rating]="refereeRating"
+  [comments]="refereeComments"
+  (close)="closeRefereeModal()"
+  (ratingChange)="rateReferee($event)"
+  (commentsChange)="refereeComments = $event"
+  (submitRating)="submitRefereeRating()">
+</app-referee-modal>
+
+<!-- Modal de Calificación de Equipo -->
+<app-team-rating-modal
+  [showModal]="showTeamRatingModal"
+  [referees]="referees"
+  (close)="closeTeamRatingModal()"
+  (submitRating)="submitTeamRating()">
+</app-team-rating-modal>
+
+<app-signature-modal
+  (signatureSaved)="onSignatureSaved($event)"
+  (modalClosed)="onModalClosed()">
+</app-signature-modal>
+
+<!-- Mostrar la firma guardada -->
+<div *ngIf="signatureData" class="signature-preview">
+  <h3>Firma guardada:</h3>
+  <img [src]="signatureData" alt="Firma guardada" class="preview-image">
+</div>

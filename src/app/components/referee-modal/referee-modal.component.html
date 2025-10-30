@@ -1,0 +1,93 @@
+<div *ngIf="showModal" class="modal-overlay card-overlay" (click)="onClose()">
+  <div class="modal-content card-modal" (click)="$event.stopPropagation()">
+    <!-- Header simplificado -->
+    <div class="card-header">
+      <h3>Calificar Árbitro</h3>
+      <button class="icon-close" (click)="onClose()">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+          <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" />
+        </svg>
+      </button>
+    </div>
+
+    <div class="card-body">
+      <!-- Tarjeta de árbitro -->
+      <div class="profile-card" *ngIf="referee">
+        <div class="profile-main">
+          <div class="avatar-container">
+            <img [src]="referee.photo" [alt]="referee.name" class="profile-img" (error)="handleImageError($event)">
+            <div *ngIf="!referee.photo" class="profile-initials">
+              {{ getInitials() }}
+            </div>
+          </div>
+          <div class="profile-details">
+            <h4>{{ referee.name }} {{ referee.fLastName }}</h4>
+            <p class="role">{{ referee.position }}</p>
+            <div class="badges">
+              <span class="badge">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="currentColor" stroke-width="1.5" />
+                </svg>
+                {{ referee.experience }} años
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sección de rating tipo card -->
+      <div class="rating-card">
+        <div class="card-title">
+          <h4>Calificación General</h4>
+          <div class="rating-display">
+            <span class="rating-value">{{ rating }}</span>
+            <span class="rating-max">/5</span>
+          </div>
+        </div>
+
+        <div class="interactive-stars">
+          <div class="stars-row">
+            <button *ngFor="let star of getStarsArray(5)" class="star-button" [class.rated]="isStarActive(star, rating)"
+              [class.highlighted]="hoverRating >= star" (click)="onRate(star)" (mouseenter)="hoverRating = star"
+              (mouseleave)="hoverRating = 0">
+              <svg width="30" height="30" viewBox="0 0 24 24"
+                [attr.fill]="(isStarActive(star, rating) || hoverRating >= star) ? 'currentColor' : 'none'"
+                stroke="currentColor" stroke-width="1.5">
+                <path
+                  d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+              </svg>
+            </button>
+          </div>
+          <div class="rating-help">
+            <span>Selecciona de 1 a 5 estrellas</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Comentarios en tarjeta separada -->
+      <div class="comments-card">
+        <div class="card-title">
+          <h4>Comentarios Adicionales</h4>
+          <span class="optional">Opcional</span>
+        </div>
+        <textarea [(ngModel)]="comments" (input)="onCommentsChange()"
+          placeholder="¿Algo específico que quieras destacar sobre el desempeño del árbitro?" maxlength="{{maxLength}}" rows="3"
+          class="comment-textarea">
+        </textarea>
+        <div class="text-meta">
+          <span class="char-limit">{{ maxLength - comments.length }} caracteres restantes</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Acciones flotantes -->
+    <div class="card-actions">
+      <button class="action-btn cancel" (click)="onClose()">
+        Cancelar
+      </button>
+      <button class="action-btn submit" (click)="onSubmit()" [disabled]="rating === 0">
+        Confirmar Calificación
+      </button>
+    </div>
+  </div>
+</div>

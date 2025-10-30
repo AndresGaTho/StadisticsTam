@@ -3,10 +3,11 @@ import { Match } from '../../interfaces/Match';
 import { CommonModule } from '@angular/common';
 import { ScoreControlComponent } from '../score-control/score-control.component';
 import { PlayersListComponent } from '../players-list/players-list.component';
+import { RefereesListComponent } from '../referees-list/referees-list.component';
 
 @Component({
   selector: 'app-team-modal',
-  imports: [CommonModule, ScoreControlComponent, PlayersListComponent],
+  imports: [CommonModule, ScoreControlComponent, PlayersListComponent,RefereesListComponent],
   templateUrl: './team-modal.component.html',
   styleUrl: './team-modal.component.css',
 })
@@ -65,7 +66,12 @@ export class TeamModalComponent {
   onSaveScore(): void {
     this.saveScore.emit();
   }
-  
+
+  onRatingSubmitted(event: { type: 'referee' | 'team'; data: any }) {
+  console.log('⭐ Calificación recibida:', event);
+  // Aquí puedes manejar las calificaciones recibidas
+}
+
   onPlayerStatsUpdate($event: {
     playerId: number;
     teamId: number;
@@ -74,6 +80,17 @@ export class TeamModalComponent {
     value: number;
     previousValue: number;
   }) {
-    throw new Error('Method not implemented.');
+    console.log($event);
+
+    if ($event.field == 'ptd') {
+      let points: number = 6;
+
+      // para partidos mixtos
+      if ($event.idCategory == 3) {
+        points = 7;
+      }
+
+      this.scoreUpdate.emit({ points });
+    }
   }
 }

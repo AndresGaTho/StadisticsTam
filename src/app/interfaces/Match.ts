@@ -1,4 +1,5 @@
 import { MatchTeam } from './MatchTeam';
+import { Ref } from './Ref';
 
 export interface Match {
   id: number;
@@ -11,4 +12,5 @@ export interface Match {
   scoreB: number;
   category: 'varonil' | 'femenil' | 'mixto';
   idCategory: number;
+  plantilla: Ref[];
 }

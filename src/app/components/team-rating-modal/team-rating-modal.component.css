@@ -1,0 +1,138 @@
+.team-rating-modal {
+  max-width: 700px;
+}
+
+.team-summary {
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  background: #f8fafc;
+  border-radius: 16px;
+}
+
+.summary-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: 1rem;
+}
+
+.stat-card {
+  text-align: center;
+  padding: 1rem;
+  background: white;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+}
+
+.stat-number {
+  display: block;
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #667eea;
+  margin-bottom: 0.25rem;
+}
+
+.stat-label {
+  font-size: 0.875rem;
+  color: #64748b;
+  font-weight: 500;
+}
+
+.team-rating-categories {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.rating-category-team {
+  padding: 1.5rem;
+  background: #f8fafc;
+  border-radius: 16px;
+  border: 2px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.rating-category-team:hover {
+  border-color: #e2e8f0;
+  transform: translateY(-2px);
+}
+
+.category-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.category-header h5 {
+  margin: 0;
+  font-size: 1.1rem;
+  color: #1e293b;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.category-rating {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #f59e0b;
+}
+
+.category-description {
+  margin: 0.75rem 0 0 0;
+  color: #64748b;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.team-comments-section {
+  margin-top: 2rem;
+}
+
+.team-comments-field {
+  width: 100%;
+  padding: 1rem;
+  border: 2px solid #e2e8f0;
+  border-radius: 12px;
+  font-family: inherit;
+  resize: vertical;
+  background: white;
+  transition: all 0.3s ease;
+}
+
+.team-comments-field:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.chars-counter-modal {
+  text-align: right;
+  font-size: 0.875rem;
+  color: #64748b;
+  margin-top: 0.5rem;
+}
+
+.chars-counter-modal.warning {
+  color: #92400e;
+}
+
+@media (max-width: 768px) {
+  .summary-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .category-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .summary-stats {
+    grid-template-columns: 1fr;
+  }
+}
